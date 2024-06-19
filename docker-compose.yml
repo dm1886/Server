@@ -15,6 +15,7 @@ services:
     container_name: postgres_container
     image: postgres:latest
     restart: always
+    platform: linux/amd64  # Specify platform for compatibility
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
@@ -28,6 +29,7 @@ services:
     container_name: pgadmin_container
     image: dpage/pgadmin4
     restart: always
+    platform: linux/amd64  # Specify platform for compatibility
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -41,43 +43,3 @@ volumes:
     external: true
 
 
-
-
-
-# version: '3.8'
-# services:
-#   server-app:
-#     build: 
-#       context: .
-#       args:
-#         - NODE_ENV=development
-#     ports:
-#       - "3000:3000"
-#     env_file:
-#       - .env
-#   db:
-#     container_name: postgres_container
-#     image: postgres:latest
-#     restart: always
-#     volumes:
-#       - pgdata:/var/lib/postgresql/data
-#     environment:
-#       POSTGRES_USER: root
-#       POSTGRES_PASSWORD: root
-#       POSTGRES_DB: amu_db
-#     ports:
-#       - "5432:5432"
-#   pgadmin:
-#     container_name: pgadmin_container
-#     image: dpage/pgadmin4
-#     restart: always
-#     environment:
-#       PGADMIN_DEFAULT_EMAIL:  admin@admin.com
-#       PGADMIN_DEFAULT_PASSWORD: root
-#     ports:  
-#       - "5050:80"
-#     depends_on:
-#       - db
-# volumes:
-#   pgdata:
-#     external: true

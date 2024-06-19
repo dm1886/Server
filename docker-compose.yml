@@ -6,6 +6,7 @@ services:
       context: .
       args:
         - NODE_ENV=development
+    platform: linux/amd64  # Specify platform for compatibility
     ports:
       - "3000:3000"
     env_file:

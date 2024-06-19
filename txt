@@ -1,0 +1,10 @@
+#  docker run -p 3000:3000 -v ${pwd}:/app -d --name server-app server-image
+
+#  delete 
+#  docker rm server-app -f
+
+#  delete all volume also
+#  docker rm server-app -fv
+
+
+#  cancel all docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v 

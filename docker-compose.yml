@@ -2,22 +2,20 @@ version: '3.8'
 
 services:
   server-app:
-    build: 
+    build:
       context: .
       args:
         - NODE_ENV=development
-    platform: linux/arm64 # Specify platform for compatibility for windows use linux/amd64
-    image: server-app:mac
+    image: damianomiazzi/multiarch-server:latest
     ports:
       - "3002:3002"
     env_file:
       - .env
 
   db:
-    container_name: postgres_container
     image: postgres:latest
+    container_name: postgres_container
     restart: always
-    platform: linux/arm64 
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
@@ -25,17 +23,16 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: amu_db
     ports:
-      - "5433:5433" # Change the port to avoid conflict with local postgres 5432 original port
+      - "5433:5433"
 
   pgadmin:
+    image: dpage/pgadmin4:latest
     container_name: pgadmin_container
-    image: dpage/pgadmin4
     restart: always
-    platform: linux/arm64  
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
-    ports:  
+    ports:
       - "5050:80"
     depends_on:
       - db
@@ -43,5 +40,3 @@ services:
 volumes:
   pgdata:
     external: true
-
-

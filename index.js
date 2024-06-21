@@ -4,7 +4,8 @@ const app = express();
 const port = process.env.PORT || 3002;
 
 app.get('/', (req, res) => {
-    res.send("<h1>Hello World! Im ONLINE with dcker</h1>" );
+    res.send("<h1>Hello World! Im ONLINE with new test mac dcker</h1>" );
+    res.end(`Hello this is ${process.arch}` );
 });
 
 app.listen(port, () => {

@@ -7,6 +7,7 @@ services:
       args:
         - NODE_ENV=development
     image: damianomiazzi/multiarch-server:latest
+    container_name: server-app-amu
     ports:
       - "3002:3002"
     env_file:
@@ -17,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile.postgres
     image: damianomiazzi/multiarch-postgres:latest
-    container_name: postgres_container
+    container_name: postgres-amu
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -33,7 +34,7 @@ services:
       context: .
       dockerfile: Dockerfile.pgadmin
     image: damianomiazzi/multiarch-pgadmin:latest
-    container_name: pgadmin_container
+    container_name: pgadmin-amu
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com

@@ -1,11 +1,11 @@
 # Use an official Node.js runtime as a parent image
-FROM node
+FROM node:14
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the package.json file
-COPY package.json .
+# Copy the package.json and package-lock.json files
+COPY package.json package-lock.json ./
 
 # Install dependencies based on the environment variable
 ARG NODE_ENV
@@ -14,8 +14,6 @@ RUN if [ "$NODE_ENV" = "development" ]; then \
     else \
         npm install --only=production; \
     fi
-
-
 
 # Copy the rest of the application code
 COPY . .
@@ -27,4 +25,4 @@ ENV PORT=3002
 EXPOSE $PORT
 
 # Define the command to run the application
-CMD ["node", "index.js"]
+CMD ["npm", "run", "dev"]  # Use npm run dev to start with nodemon in development mode
